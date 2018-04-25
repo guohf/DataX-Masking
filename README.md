@@ -1,6 +1,6 @@
 # DataX-Masking
 
-DataX-Masking 是在 [DataX 3.0] (https://github.com/alibaba/DataX/)框架基础上二次开发得到的**数据脱敏平台**，可以快速地在数据传输过程中对指定的单个或多个字段用可选的脱敏方法进行处理。
+DataX-Masking 是在 [DataX 3.0](https://github.com/alibaba/DataX/)框架基础上二次开发得到的**数据脱敏平台**，可以快速地在数据传输过程中对指定的单个或多个字段用可选的脱敏方法进行处理。
 
 
 # Features
