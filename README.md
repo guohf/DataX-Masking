@@ -1,13 +1,13 @@
 # DataX-Masking
 
-Data-Masking 是在 [DataX 3.0] (https://github.com/alibaba/DataX/)框架基础上二次开发得到的**数据脱敏平台**，可以快速地在数据传输过程中对指定的单个或多个字段用可选的脱敏方法进行处理。
+DataX-Masking 是在 [DataX 3.0] (https://github.com/alibaba/DataX/)框架基础上二次开发得到的**数据脱敏平台**，可以快速地在数据传输过程中对指定的单个或多个字段用可选的脱敏方法进行处理。
 
 
 # Features
 
 DataX本身作为数据同步框架，将不同数据源的同步抽象为从源头数据源读取数据的Reader插件，以及向目标端写入数据的Writer插件，理论上DataX框架可以支持任意数据源类型的数据同步工作。同时DataX插件体系作为一套生态系统, 每接入一套新数据源该新加入的数据源即可实现和现有的数据源互通。
 
-Data-Masking 通过扩展DataX的transformer中间件，集成了多种脱敏算法，主要包括：epsilon差分隐私保护，保型加密，MD5摘要算法，AES加密，RSA非对称加密等。
+DataX-Masking 通过扩展DataX的transformer中间件，集成了多种脱敏算法，主要包括：epsilon差分隐私保护，保型加密，MD5摘要算法，AES加密，RSA非对称加密等。
 
 详细使用方法请参考 [transformer介绍文档](/transformer/doc/transformer.md)。
 
@@ -53,7 +53,7 @@ DataX目前已经有了比较全面的插件体系，主流的RDBMS数据库、N
 |              | Elasticsearch       |         |     √     |[写](https://github.com/alibaba/DataX/blob/master/elasticsearchwriter/doc/elasticsearchwriter.md)|
 
 # 我要开发新的插件
-请点击：[DataX插件开发宝典](xxx)
+请点击：[DataX transformer插件开发](https://blog.csdn.net/landstream/article/details/79933800)
 
 # Data-Masking Contributor
 * Liu Kun
