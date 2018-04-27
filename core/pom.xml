@@ -97,22 +97,6 @@
             <artifactId>groovy-all</artifactId>
             <version>2.1.9</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-math3</artifactId>
-            <version>3.6.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk15on</artifactId>
-            <version>1.50</version>
-        </dependency>
-        <!-- Repository of Format-Preserving Encryption -->
-        <dependency>
-            <groupId>com.idealista</groupId>
-            <artifactId>format-preserving-encryption</artifactId>
-            <version>1.0.0</version>
-        </dependency>
     </dependencies>
 
     <build>

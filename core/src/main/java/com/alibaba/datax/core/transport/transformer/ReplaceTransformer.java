@@ -4,7 +4,7 @@ import com.alibaba.datax.common.element.Column;
 import com.alibaba.datax.common.element.Record;
 import com.alibaba.datax.common.element.StringColumn;
 import com.alibaba.datax.common.exception.DataXException;
-import com.alibaba.datax.transformer.Transformer;
+import com.alibaba.datax.transport.transformer.Transformer;
 
 import java.util.Arrays;
 

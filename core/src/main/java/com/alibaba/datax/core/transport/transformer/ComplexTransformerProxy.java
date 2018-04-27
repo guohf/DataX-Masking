@@ -1,8 +1,8 @@
 package com.alibaba.datax.core.transport.transformer;
 
 import com.alibaba.datax.common.element.Record;
-import com.alibaba.datax.transformer.ComplexTransformer;
-import com.alibaba.datax.transformer.Transformer;
+import com.alibaba.datax.transport.transformer.ComplexTransformer;
+import com.alibaba.datax.transport.transformer.Transformer;
 
 import java.util.Map;
 
