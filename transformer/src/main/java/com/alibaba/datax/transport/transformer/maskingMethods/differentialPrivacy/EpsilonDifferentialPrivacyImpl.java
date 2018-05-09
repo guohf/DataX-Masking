@@ -41,14 +41,17 @@ public class EpsilonDifferentialPrivacyImpl extends DifferentialPrivacyMasking {
 
     public String maskOne(String originData, double epsilon) throws Exception {
         double val = Double.parseDouble(originData) + Laplace.pdf(1 / epsilon);
-        String resVal = Double.toString(val);
-        return resVal;
+        return String.valueOf(val);
     }
 
-    public String maskOne(double originData, double epsilon) throws Exception {
+    public double maskOne(double originData, double epsilon) throws Exception {
         double val = originData + Laplace.pdf(1 / epsilon);
-        String resVal = Double.toString(val);
-        return resVal;
+        return val;
+    }
+
+    public long maskOne(long originData, double epsilon) throws Exception {
+        double val = originData + Laplace.pdf(1 / epsilon);
+        return (long)val;
     }
 
     public void mask(){

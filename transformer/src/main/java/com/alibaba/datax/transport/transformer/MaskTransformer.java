@@ -1,18 +1,16 @@
 package com.alibaba.datax.transport.transformer;
 
-import com.alibaba.datax.common.element.Column;
-import com.alibaba.datax.common.element.DoubleColumn;
-import com.alibaba.datax.common.element.Record;
-import com.alibaba.datax.common.element.StringColumn;
+import com.alibaba.datax.common.element.*;
 import com.alibaba.datax.common.exception.DataXException;
+import com.alibaba.datax.transport.transformer.maskingMethods.anonymity.*;
 import com.alibaba.datax.transport.transformer.maskingMethods.cryptology.AESEncryptionImpl;
 import com.alibaba.datax.transport.transformer.maskingMethods.cryptology.FormatPreservingEncryptionImpl;
 import com.alibaba.datax.transport.transformer.maskingMethods.cryptology.RSAEncryptionImpl;
 import com.alibaba.datax.transport.transformer.maskingMethods.differentialPrivacy.EpsilonDifferentialPrivacyImpl;
 import com.alibaba.datax.transport.transformer.maskingMethods.irreversibleInterference.MD5EncryptionImpl;
-import com.alibaba.datax.transport.transformer.TransformerErrorCode;
 
 import java.util.Arrays;
+import java.util.Date;
 
 /**
  * Mask data to protect privacy.
@@ -25,7 +23,7 @@ public class MaskTransformer extends  Transformer{
     String key;
     int columnIndex;
 
-    public  MaskTransformer(){ setTransformerName("dx_masker");};
+    public  MaskTransformer(){ setTransformerName("dx_masker");}
 
     @Override
     public Record evaluate(Record record, Object... paras) {
@@ -48,13 +46,7 @@ public class MaskTransformer extends  Transformer{
             if(oriValue == null){
                 return  record;
             }
-            if (maskMethodId.equals("EDP")){
-                String newValue;
-                EpsilonDifferentialPrivacyImpl masker = new EpsilonDifferentialPrivacyImpl();
-                newValue = masker.maskOne(oriValue, Double.parseDouble(key));
-                record.setColumn(columnIndex, new DoubleColumn(newValue));
-            }
-            else if(maskMethodId.equals("AES")){
+            if(maskMethodId.equals("AES")){
                 String newValue;
                 AESEncryptionImpl masker = new AESEncryptionImpl();
                 newValue = masker.execute(oriValue);
@@ -65,25 +57,20 @@ public class MaskTransformer extends  Transformer{
                 String newValue = masker.execute(oriValue);
                 record.setColumn(columnIndex, new StringColumn(newValue));
             }
-            else if(maskMethodId.equals("MD5")) {
-                MD5EncryptionImpl masker = new MD5EncryptionImpl();
-                String newValue = masker.execute(oriValue);
-                record.setColumn(columnIndex, new StringColumn(newValue));
-            }
             else if(maskMethodId.equals("RSA")){
                 RSAEncryptionImpl masker = new RSAEncryptionImpl();
                 String newValue = "";
                 if (key.equals("private_decrypt")){
-                    newValue = masker.executeWithPrivateDecrypt(oriValue);
+                    newValue = masker.executeWithPrivateDecrypt(oriValue, masker.PKCS1);
                 }
                 else if(key.equals("private_encrypt")){
-                    newValue = masker.executeWithPrivateEncrypt(oriValue);
+                    newValue = masker.executeWithPrivateEncrypt(oriValue, masker.PKCS1);
                 }
                 else if(key.equals("public_decrypt")){
-                    newValue = masker.executeWithPublicDecrypt(oriValue);
+                    newValue = masker.executeWithPublicDecrypt(oriValue, masker.PKCS1);
                 }
                 else if(key.equals("public_encrypt")){
-                    newValue = masker.executeWithPublicEncrypt(oriValue);
+                    newValue = masker.executeWithPublicEncrypt(oriValue, masker.PKCS1);
                 }
                 record.setColumn(columnIndex, new StringColumn(newValue));
             }

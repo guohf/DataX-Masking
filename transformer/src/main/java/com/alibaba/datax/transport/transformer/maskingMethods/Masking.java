@@ -15,5 +15,4 @@ public interface Masking {
      * @throws Exception if error occurs during masking
      */
     void mask() throws Exception;
-
 }

@@ -96,8 +96,8 @@ public class RSAEncryptionImpl extends CryptologyMasking{
 
 	/**
 	 * 使用公钥加密
-	 * @param clearBytes
-	 * @param type
+	 * @clearBytes
+	 * @type: padding type
 	 * @return
 	 */
 	public byte[] publicEncrypt(byte[] clearBytes, int type) {
@@ -219,8 +219,8 @@ public class RSAEncryptionImpl extends CryptologyMasking{
 		return -1;
 	}
 
-	public String execute(String originData, String type) throws NoSuchAlgorithmException {
-        byte[] cipher = publicEncrypt(originData.getBytes(), 1);
+	public String execute(String originData, int type) throws NoSuchAlgorithmException {
+        byte[] cipher = publicEncrypt(originData.getBytes(), type);
         return changeBytesToString(cipher);
     }
 
@@ -234,31 +234,31 @@ public class RSAEncryptionImpl extends CryptologyMasking{
     }
 
 
-	public String executeWithPublicDecrypt(String originData) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+	public String executeWithPublicDecrypt(String originData, int type) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		BigInteger origin = new BigInteger(originData, 16);
-		byte[] cipher = publicDecrypt(origin.toByteArray(), RAW);
+		byte[] cipher = publicDecrypt(origin.toByteArray(), type);
 		String decoded = changeBytesToString(cipher);
 		BigInteger raw_code = new BigInteger(decoded,16);
 		String result = new String(raw_code.toByteArray(), "ascii");
 		return result;
 	}
 
-	public String executeWithPublicEncrypt(String originData) throws NoSuchAlgorithmException {
-		byte[] cipher = publicEncrypt(originData.getBytes(), RAW);
+	public String executeWithPublicEncrypt(String originData, int type) throws NoSuchAlgorithmException {
+		byte[] cipher = publicEncrypt(originData.getBytes(), type);
 		return changeBytesToString(cipher);
 	}
 
-	public String executeWithPrivateDecrypt(String originData) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+	public String executeWithPrivateDecrypt(String originData, int type) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		BigInteger origin = new BigInteger(originData, 16);
-		byte[] cipher = privateDecrypt(origin.toByteArray(), RAW);
+		byte[] cipher = privateDecrypt(origin.toByteArray(), type);
 		String decoded = changeBytesToString(cipher);
 		BigInteger raw_code = new BigInteger(decoded,16);
 		String result = new String(raw_code.toByteArray(), "ascii");
 		return result;
 	}
 
-	public String executeWithPrivateEncrypt(String originData) throws NoSuchAlgorithmException {
-		byte[] cipher = privateEncrypt(originData.getBytes(), RAW);
+	public String executeWithPrivateEncrypt(String originData, int type) throws NoSuchAlgorithmException {
+		byte[] cipher = privateEncrypt(originData.getBytes(), type);
 		return changeBytesToString(cipher);
 	}
 
@@ -299,13 +299,49 @@ public class RSAEncryptionImpl extends CryptologyMasking{
 	}
 */
 	public static void main(String[] args){
-		String content = new String("asdjl12");
-		RSAEncryptionImpl rsatest = new RSAEncryptionImpl();
-		System.out.println("String加密前：asdjl12");
-		System.out.println("字符串："+ rsatest.changeBytesToString(content.getBytes()));
-		byte[] cipher=rsatest.publicEncrypt(content.getBytes(), 1);
-		System.out.println("公钥加密后："+ rsatest.changeBytesToString(cipher));
-		byte[] plain=rsatest.privateDecrypt(cipher, 1);
-		System.out.println("解密后："+rsatest.changeBytesToString(plain));
+		RSAEncryptionImpl masker = new RSAEncryptionImpl();
+		for(int i=0;i<10;i++){
+			try{
+//				String content = new String("C");
+//				RSAEncryptionImpl rsatest = new RSAEncryptionImpl();
+//				String result = rsatest.execute(content, 2);
+//				System.out.println(result);
+//				int PaddingType = rsatest.RAW;
+//				System.out.println("RSA加密解密\n数据加密前：" + content);
+//				System.out.println("将原始数据转换为16进制表示的字串：" + rsatest.changeBytesToString(content.getBytes()));
+//				String masked = rsatest.executeWithPrivateEncrypt(content, PaddingType);
+//				System.out.println("私钥加密后：" + masked);
+//				String decoded = rsatest.executeWithPublicDecrypt(masked, PaddingType);
+//				System.out.println("解密后：" + decoded);
+//				masked = rsatest.executeWithPublicEncrypt(content, PaddingType);
+//				System.out.println("公钥加密后：" + masked);
+//				decoded = rsatest.executeWithPrivateDecrypt(masked, PaddingType);
+//				System.out.println("私钥解密后：" + decoded);
+			}
+			catch (Exception e){
+				System.out.println(e);
+			}
+		}
+//		RSAEncryptionImpl rsatest = new RSAEncryptionImpl();
+//		try{
+//			String example = "ZU";
+//			String encrypt = rsatest.executeWithPublicEncrypt(example, 1);
+//			System.out.println(encrypt);
+//			String result = rsatest.executeWithPrivateDecrypt(encrypt, 1);
+//			System.out.println(result);
+//		}catch (Exception e){
+//			System.out.println(e);
+//		}
+		for(int i=0;i<10;i++){
+			//ASCII字符长度不能超过117，原因不得而知。
+			String content = new String("BKG2I");
+			RSAEncryptionImpl rsatest = new RSAEncryptionImpl();
+			System.out.println("String加密前："+ content);
+			System.out.println("字符串："+ rsatest.changeBytesToString(content.getBytes()));
+			byte[] cipher=rsatest.publicEncrypt(content.getBytes(), RAW);
+			System.out.println("公钥加密后："+ rsatest.changeBytesToString(cipher));
+			byte[] plain=rsatest.privateDecrypt(cipher, RAW);
+			System.out.println("解密后："+ new String(plain));
+		}
 	}
 }

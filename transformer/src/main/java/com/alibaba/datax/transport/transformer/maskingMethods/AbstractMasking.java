@@ -30,6 +30,8 @@ public abstract class AbstractMasking implements Masking{
      */
     public abstract double execute(double d) throws Exception;
 
+
+
     /**
      * Mask.
      *

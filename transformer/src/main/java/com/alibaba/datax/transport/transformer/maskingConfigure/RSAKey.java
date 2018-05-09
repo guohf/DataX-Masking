@@ -48,6 +48,8 @@ public class RSAKey {
         pemFile.write(filename);
     }
 
+    /*
+    * 每次随机生成密钥对*/
     public static RSAPrivateKey getPrivateKey() throws Exception{
         try {
             File file = new File("id_rsa");
@@ -61,9 +63,9 @@ public class RSAKey {
             PKCS8EncodedKeySpec privKeySpec = new PKCS8EncodedKeySpec(binaries);
             KeyFactory factory = KeyFactory.getInstance("RSA");
             RSAPrivateKey privateKey = (RSAPrivateKey) factory.generatePrivate(privKeySpec);
-            return privateKey;
 //            String privateKeyModulus = privateKey.getModulus().toString();
 //            System.out.println(privateKeyModulus);
+            return privateKey;
         }
         catch (Exception e){
             System.out.println(e);

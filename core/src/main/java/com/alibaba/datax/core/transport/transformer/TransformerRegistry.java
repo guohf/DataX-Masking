@@ -4,12 +4,11 @@ import com.alibaba.datax.common.exception.DataXException;
 import com.alibaba.datax.common.util.Configuration;
 import com.alibaba.datax.core.util.container.CoreConstant;
 import com.alibaba.datax.core.util.container.JarLoader;
-import com.alibaba.datax.transport.transformer.ComplexTransformer;
-import com.alibaba.datax.transport.transformer.Transformer;
-import com.alibaba.datax.transport.transformer.MaskTransformer;
+import com.alibaba.datax.transport.transformer.*;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sun.java2d.pipe.RegionIterator;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -37,7 +36,15 @@ public class TransformerRegistry {
         registTransformer(new ReplaceTransformer());
         registTransformer(new FilterTransformer());
         registTransformer(new GroovyTransformer());
+
+        // Only for DataX-Masking
+        registTransformer(new EDPTransformer());
+        registTransformer(new EnumerateTransformer());
+        registTransformer(new FloorTransformer());
+        registTransformer(new HidingTransformer());
         registTransformer(new MaskTransformer());
+        registTransformer(new MD5Transformer());
+        registTransformer(new PrefixPreserveTransformer());
     }
 
     public static void loadTransformerFromLocalStorage() {
