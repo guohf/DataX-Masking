@@ -17,22 +17,12 @@ DataX本身作为数据同步框架，将不同数据源的同步抽象为从源
 
 * 工具部署
   
-  * 方法一、直接下载DataX工具包：[DataX下载地址](http://datax-opensource.oss-cn-hangzhou.aliyuncs.com/datax.tar.gz)
-    
-    下载后解压至本地某个目录，进入bin目录，即可运行同步作业：
-    
-    ``` shell
-    $ cd  {YOUR_DATAX_HOME}/bin
-    $ python datax.py {YOUR_JOB.json}
-    ```
-    自检脚本：
-    python {YOUR_DATAX_HOME}/bin/datax.py {YOUR_DATAX_HOME}/job/job.json
-  * 方法二、下载DataX源码，自己编译：[DataX源码](https://github.com/alibaba/DataX)
+  * 下载源码，自己编译：[DataX-Masking源码](https://github.com/ECNU-1X/DataX-Masking.git)
     
     (1)、下载DataX源码：
     
     ``` shell
-    $ git clone git@github.com:alibaba/DataX.git
+    $ git clone https://github.com/ECNU-1X/DataX-Masking.git
     ```
     
     (2)、通过maven打包：
