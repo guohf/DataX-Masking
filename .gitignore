@@ -24,6 +24,12 @@ hs_err_pid*
 *.iml
 .idea
 .settings
-/target
+*/target
 *.project
 *.classpath
+
+*/id_rsa
+*/id_rsa.pub
+
+*id_rsa
+*id_rsa.pub

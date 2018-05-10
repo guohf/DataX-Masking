@@ -108,57 +108,15 @@ String code3 = "Column column = record.getColumn(1);\n" +
                 " return record;";
 ```
 
-## DataX脱敏方法集成与实现
-6. dx_masker
+6. dx_cryp
 
-通过继承和扩展Transformer类，在dataX上实现了几种字段脱敏方法。[具体实现](https://blog.csdn.net/landstream/article/details/79933800)和使用方法如下：
+通过继承和扩展Transformer类，在dataX上实现了几种字段脱敏方法和使用方法如下：
 
   * 参数：3个
       * 第一个参数：字段编号，对应record中第几个字段(columnIndex)。
       * 第二个参数：选择的加密算法的代号。
       * 第三个参数：加密算法的加密参数，如果需要的话。
   * 返回： 加密过的数据。如果开始位置非法会抛出异常。如果字段为空值，直接返回（即不参与本transformer）
-
-  * 加密方法：
-
-| 加密算法代号 | 加密算法 | 加密数据类型 | 参数说明 |
-| - | :-: | :-: | - |
-| EDP | Epsilon Differential Privacy | Double | double epsilon |
-| AES | AES-128-CBC | String | 加密算法不需要额外参数 |
-| FPE | format Preserving Encryption | String | 不需要额外参数，**字符串中只能包含小写字母而不能有任何其他字符** |
-| MD5 | MD5 摘要算法 | String | 不需要额外参数 |
-| RSA | RSA 非对称密钥加密算法 | String | 缺省情况下私钥和密钥由系统生成并以.pem形式存储在本地。*private_encrypt* 私钥加密；*private_decrypt* 私钥解密；*public_encrypt* 公钥加密；*public_decrypt* 公钥解密 |
-
-  * 举例：
-```
-                "transformer": [
-                    {
-                        "name": "dx_masker",
-                        "parameter": 
-                            {
-                            "columnIndex":1,
-                            "paras":["EDP"(脱敏方法代号),"0.5"]
-                            }  
-                    }
-                ]
-```
-### RSA加密解密操作补充说明
-支持全部四种加密解密操作：
-1. 公钥加密；
-2. 公钥解密；
-3. 私钥加密；
-4. 私钥解密。
-
-公钥加密后配合私钥解密可以实现针对特定对象的加密传输，可以用来交易数据。
-
-私钥加密后配合公钥解密可以实现签名功能，用以验证数据来源。
-
-**为了保证加密解密过程的有效性，这里在加密过程中取消了padding方法，这使得对于需要加密的明文，其对应的bite位长度应小于秘钥长度(1024）位，**
-点此查看[原因](http://arganzheng.life/input-too-large-for-RSA-cipher.html)。
-
-公钥和私钥的配置：bin 目录下，如果用户不提供公钥(id_rsa.pub))和私钥文件(id_rsa)，系统将自动生成秘钥对并存储于本地，秘钥内容格式为pem。
-
-Ps: 我们在ubuntu 16.04系统上结合MySQL5.7进行了一百万条简单的字符串加密解密实验，用公钥加密后，使用私钥解密，最终实验中有2条在私钥解密阶段出错并被作为脏数据丢弃，错误暂无法重现，原因正在分析中。
 
 ## Job定义
 * 本例中，配置3个UDF。

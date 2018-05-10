@@ -1,20 +1,15 @@
-package ModuleTest; /**
- * Created by LabUser on 2018/4/22.
+package ModuleTest;
+
+/**
+ * Created by Liu Kun on 2018/4/22.
  */
+
 import com.alibaba.datax.transport.transformer.maskingMethods.differentialPrivacy.EpsilonDifferentialPrivacyImpl;
 import com.alibaba.datax.transport.transformer.maskingMethods.cryptology.RSAEncryptionImpl;
 import com.alibaba.datax.transport.transformer.maskingMethods.cryptology.AESEncryptionImpl;
 import com.alibaba.datax.transport.transformer.maskingMethods.irreversibleInterference.MD5EncryptionImpl;
 import com.alibaba.datax.transport.transformer.maskingMethods.cryptology.FormatPreservingEncryptionImpl;
 import org.junit.Test;
-import org.bouncycastle.asn1.eac.RSAPublicKey;
-import org.bouncycastle.asn1.ASN1Sequence;
-import org.bouncycastle.util.io.pem.PemObject;
-import org.bouncycastle.util.io.pem.PemReader;
-import org.bouncycastle.util.io.pem.PemWriter;
-
-import java.math.BigInteger;
-import java.security.NoSuchAlgorithmException;
 
 public class TestMasking {
 

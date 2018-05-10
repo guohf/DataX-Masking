@@ -41,7 +41,14 @@ public class FloorTransformer extends Transformer {
                 Date newValue = FloorMasker.mask(column.asDate(), key);
                 record.setColumn(columnIndex, new DateColumn(newValue));
             } else if (column.getType() == Column.Type.LONG || column.getType() == Column.Type.INT) {
-                long newValue = FloorMasker.mask(column.asLong(), Integer.valueOf(key));
+                int mod = 0;
+                if (key.isEmpty()){
+                    mod = 10;
+                }
+                else{
+                    mod = Integer.valueOf(key);
+                }
+                long newValue = FloorMasker.mask(column.asLong(), mod);
                 record.setColumn(columnIndex, new LongColumn(newValue));
             } else if (column.getType() == Column.Type.DOUBLE) {
                 Double newValue = FloorMasker.mask(column.asDouble());

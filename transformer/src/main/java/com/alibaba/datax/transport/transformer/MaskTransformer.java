@@ -23,7 +23,7 @@ public class MaskTransformer extends  Transformer{
     String key;
     int columnIndex;
 
-    public  MaskTransformer(){ setTransformerName("dx_masker");}
+    public  MaskTransformer(){ setTransformerName("dx_cryp");}
 
     @Override
     public Record evaluate(Record record, Object... paras) {
